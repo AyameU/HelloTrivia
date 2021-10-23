@@ -1,3 +1,4 @@
+// As the name semi describes...
 // Copies an array, adds a new value added at a random index,
 // and returns the new array.
 export function AddValueToArrayAtRandomIndex(array, value) {

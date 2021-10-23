@@ -26,14 +26,18 @@ export default function Search({
     e.preventDefault();
 
     const modal = document.querySelector(".modal");
-    modal.className = "modal is-active";
+    const html = document.querySelector("html");
+    modal.classList.add("is-active");
+    html.classList.add("is-clipped");
   }
 
   function closeModal(e) {
     e.preventDefault();
 
     const modal = document.querySelector(".modal");
-    modal.className = "modal";
+    const html = document.querySelector("html");
+    modal.classList.remove("is-active");
+    html.classList.remove("is-clipped");
   }
 
   // Handles the onFocus event of the player name input.
@@ -166,9 +170,10 @@ export default function Search({
     <div className="box container has-text-centered">
       <p className="subtitle">Hello, {player}</p>
       <h2 className="title">Set up your game</h2>
+
       <form className="form" onSubmit={handleSubmit}>
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
+        <div class="field is-horizontal is-align-items-center">
+          <div class="field-label">
             <label class="label" htmlFor="playerName">
               Type your Name
             </label>
@@ -187,8 +192,8 @@ export default function Search({
           </div>
         </div>
 
-        <div className="field is-horizontal">
-          <div className="field-label is-normal">
+        <div className="field is-horizontal is-align-items-center">
+          <div className="field-label">
             <label className="label" htmlFor="numOfQuestions">
               Number of Questions?
             </label>
@@ -239,55 +244,63 @@ export default function Search({
           <div className="field-label">
             <label className="label">Difficulty</label>
           </div>
-          <div className="field-body">
-            <label className="control" htmlFor="anyDifficulty">
-              <input
-                className="mr-1"
-                type="radio"
-                name="difficulty"
-                id="anyDifficulty"
-                value=""
-                onChange={handleChange}
-                required
-              ></input>
-              Any Difficulty
-            </label>
-            <label className="control" htmlFor="easy">
-              <input
-                className="mr-1"
-                type="radio"
-                name="difficulty"
-                id="easy"
-                value="easy"
-                onChange={handleChange}
-                required
-              ></input>
-              Easy
-            </label>
-            <label className="control" htmlFor="medium">
-              <input
-                className="mr-1"
-                type="radio"
-                name="difficulty"
-                id="medium"
-                value="medium"
-                onChange={handleChange}
-                required
-              ></input>
-              Medium
-            </label>
-            <label className="control" htmlFor="hard">
-              <input
-                className="mr-1"
-                type="radio"
-                name="difficulty"
-                id="hard"
-                value="hard"
-                onChange={handleChange}
-                required
-              ></input>
-              Hard
-            </label>
+          <div className="field-body has-text-left">
+            <div className="field">
+              <label className="control" htmlFor="anyDifficulty">
+                <input
+                  className="mr-1"
+                  type="radio"
+                  name="difficulty"
+                  id="anyDifficulty"
+                  value=""
+                  onChange={handleChange}
+                  required
+                ></input>
+                Any Difficulty
+              </label>
+            </div>
+            <div className="field">
+              <label className="control" htmlFor="easy">
+                <input
+                  className="mr-1"
+                  type="radio"
+                  name="difficulty"
+                  id="easy"
+                  value="easy"
+                  onChange={handleChange}
+                  required
+                ></input>
+                Easy
+              </label>
+            </div>
+            <div className="field">
+              <label className="control" htmlFor="medium">
+                <input
+                  className="mr-1"
+                  type="radio"
+                  name="difficulty"
+                  id="medium"
+                  value="medium"
+                  onChange={handleChange}
+                  required
+                ></input>
+                Medium
+              </label>
+            </div>
+            <div className="field">
+              <label className="control" htmlFor="hard">
+                <input
+                  className="mr-1"
+                  type="radio"
+                  name="difficulty"
+                  id="hard"
+                  value="hard"
+                  onChange={handleChange}
+                  required
+                ></input>
+                Hard
+              </label>
+            </div>
           </div>
         </div>
 
@@ -295,43 +308,49 @@ export default function Search({
           <div className="field-label">
             <label className="label">Format</label>
           </div>
-          <div className="field-body">
-            <label className="control" htmlFor="anyType">
-              <input
-                className="mr-1"
-                type="radio"
-                name="format"
-                id="anyType"
-                value="any"
-                onChange={handleChange}
-                required
-              ></input>
-              Any Type
-            </label>
-            <label className="control" htmlFor="multipleChoice">
-              <input
-                className="mr-1"
-                type="radio"
-                name="format"
-                id="multipleChoice"
-                value="multiple"
-                onChange={handleChange}
-                required
-              ></input>
-              Multiple Choice
-            </label>
-            <label className="control" htmlFor="trueFalse">
-              <input
-                className="mr-1"
-                type="radio"
-                name="format"
-                id="trueFalse"
-                value="boolean"
-                onChange={handleChange}
-                required
-              ></input>
-              True/False
-            </label>
+          <div className="field-body has-text-left">
+            <div className="field">
+              <label className="control" htmlFor="anyType">
+                <input
+                  className="mr-1"
+                  type="radio"
+                  name="format"
+                  id="anyType"
+                  value="any"
+                  onChange={handleChange}
+                  required
+                ></input>
+                Any Type
+              </label>
+            </div>
+            <div className="field">
+              <label className="control" htmlFor="multipleChoice">
+                <input
+                  className="mr-1"
+                  type="radio"
+                  name="format"
+                  id="multipleChoice"
+                  value="multiple"
+                  onChange={handleChange}
+                  required
+                ></input>
+                Multiple Choice
+              </label>
+            </div>
+            <div className="field">
+              <label className="control" htmlFor="trueFalse">
+                <input
+                  className="mr-1"
+                  type="radio"
+                  name="format"
+                  id="trueFalse"
+                  value="boolean"
+                  onChange={handleChange}
+                  required
+                ></input>
+                True/False
+              </label>
+            </div>
           </div>
         </div>
 

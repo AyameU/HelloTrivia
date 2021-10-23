@@ -7,6 +7,8 @@ import React, { useEffect, useState } from "react";
 // 3. Display data
 
 export default function Search({
+  player,
+  setPlayer,
   categories,
   query,
   setQuery,
@@ -18,7 +20,12 @@ export default function Search({
   const [difficulty, setDifficulty] = useState("");
   const [format, setFormat] = useState("");
 
-  // Handles the on Change event of the form inputs.
+  // Handles the onFocus event of the player name input.
+  function handleFocus(e) {
+    e.target.select();
+  }
+
+  // Handles the onChange event of the form inputs.
   function handleChange(e) {
     switch (e.target.name) {
       case "numOfQuestions":
@@ -33,6 +40,10 @@ export default function Search({
         e.target.value !== "any" && e.target.checked
           ? setFormat(e.target.value)
           : setFormat(null);
+        break;
+      case "playerName":
+        if (e.target.value !== "") setPlayer(e.target.value);
+        else setPlayer("Player");
         break;
       default:
         break;
@@ -132,12 +143,25 @@ export default function Search({
   }, [query, setQuestions]);
 
   //console.log(categories);
-  console.log(query);
+  //console.log(query);
 
   return (
-    <div className="box container">
+    <div className="box container has-text-centered">
       <form onSubmit={handleSubmit}>
+        <p className="subtitle">Hello, {player}</p>
         <h2 className="title">Set up your game</h2>
+
+        <div className="field">
+          <label htmlFor="playerName">Type your Name</label>
+          <input
+            className="input"
+            type="text"
+            name="playerName"
+            value={player}
+            onChange={handleChange}
+            onFocus={handleFocus}
+          ></input>
+        </div>
 
         <div className="field is-grouped">
           <label

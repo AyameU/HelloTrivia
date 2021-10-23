@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="has-text-centered my-5">
+    <footer className="footer has-background-black has-text-white has-text-centered pb-6">
       <p>
         Coded by Ayame Ulrich.{" "}
         <a href="https://opentdb.com" target="_blank" rel="noreferrer">

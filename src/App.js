@@ -8,8 +8,9 @@ export default function App() {
   // Setting categories, query, errorMessages and questions state in App to "lift up state" from the Search component.
   // The state variable and setter are then passed down and updated in
   // the child component, instead of doing everything in the component.
-  const [categories, setCategories] = useState();
-  const [query, setQuery] = useState("");
+  const [player, setPlayer] = useState("Player");
+  const [categories, setCategories] = useState(null);
+  const [query, setQuery] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [questions, setQuestions] = useState(null);
 
@@ -37,6 +38,8 @@ export default function App() {
     <>
       <Header />
       <Search
+        player={player}
+        setPlayer={setPlayer}
         categories={categories}
         query={query}
         setQuery={setQuery}

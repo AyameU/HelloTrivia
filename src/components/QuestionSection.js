@@ -54,7 +54,7 @@ export default function Questions({ questions }) {
 
   return (
     <>
-      <section className="container has-text-centered mb-5">
+      <section className="container has-text-centered my-5">
         <h4 className="subtitle is-6">Current Score</h4>
         <p className="title is-4">
           {score} out of {questions.length}

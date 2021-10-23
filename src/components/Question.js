@@ -96,7 +96,7 @@ export default function Question({
                   name="answers"
                   key={key}
                   value={answer}
-                  onChange={validateChoice}
+                  onClick={validateChoice}
                   required
                 ></input>
                 {RenderHTML(answer)}

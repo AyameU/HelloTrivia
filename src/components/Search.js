@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 // ToDo
 // 1. Get search query DONE
@@ -15,10 +16,25 @@ export default function Search({
   setErrorMessage,
   setQuestions
 }) {
+  const categoryList = Object.keys(categories);
   const [number, setNumber] = useState("");
   const [category, setCategory] = useState(null);
   const [difficulty, setDifficulty] = useState("");
   const [format, setFormat] = useState("");
+
+  function openModal(e) {
+    e.preventDefault();
+
+    const modal = document.querySelector(".modal");
+    modal.className = "modal is-active";
+  }
+
+  function closeModal(e) {
+    e.preventDefault();
+
+    const modal = document.querySelector(".modal");
+    modal.className = "modal";
+  }
 
   // Handles the onFocus event of the player name input.
   function handleFocus(e) {
@@ -142,171 +158,204 @@ export default function Search({
     }
   }, [query, setQuestions]);
 
-  //console.log(categories);
+  console.log(categoryList);
+  console.log(categories);
   //console.log(query);
 
   return (
     <div className="box container has-text-centered">
-      <form onSubmit={handleSubmit}>
-        <p className="subtitle">Hello, {player}</p>
-        <h2 className="title">Set up your game</h2>
-
-        <div className="field">
-          <label htmlFor="playerName">Type your Name</label>
-          <input
-            className="input"
-            type="text"
-            name="playerName"
-            value={player}
-            onChange={handleChange}
-            onFocus={handleFocus}
-          ></input>
-        </div>
-
-        <div className="field is-grouped">
-          <label
-            className="control is-align-self-center"
-            htmlFor="numOfQuestions"
-          >
-            # of Questions?
-          </label>
-          <input
-            className="input ml-2"
-            type="number"
-            name="numOfQuestions"
-            id="numOfQuestions"
-            min="1"
-            max="50"
-            placeholder="Number of Questions"
-            required
-            onChange={handleChange}
-          ></input>
-
-          <div className="control select">
-            <select
-              className="ml-2"
-              name="category"
-              id="category"
-              onChange={(e) => {
-                if (e.target.selectedIndex === 0) {
-                  setCategory(null);
-                } else {
-                  setCategory(e.target.value);
-                }
-              }}
-              required
-            >
-              <option>Any Category</option>
-              {categories &&
-                categories.map((category, key) => (
-                  <option key={key} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-            </select>
+      <p className="subtitle">Hello, {player}</p>
+      <h2 className="title">Set up your game</h2>
+      <form className="form" onSubmit={handleSubmit}>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" htmlFor="playerName">
+              Type your Name
+            </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <input
+                className="input"
+                type="text"
+                name="playerName"
+                value={player}
+                onChange={handleChange}
+                onFocus={handleFocus}
+              ></input>
+            </div>
           </div>
         </div>
 
-        <div className="field is-grouped">
-          <p className="mr-3">
-            <strong>Difficulty</strong>
-          </p>
-          <label className="control" htmlFor="anyDifficulty">
-            <input
-              className="mr-1"
-              type="radio"
-              name="difficulty"
-              id="anyDifficulty"
-              value=""
-              onChange={handleChange}
-              required
-            ></input>
-            Any Difficulty
-          </label>
-          <label className="control" htmlFor="easy">
-            <input
-              className="mr-1"
-              type="radio"
-              name="difficulty"
-              id="easy"
-              value="easy"
-              onChange={handleChange}
-              required
-            ></input>
-            Easy
-          </label>
-          <label className="control" htmlFor="medium">
-            <input
-              className="mr-1"
-              type="radio"
-              name="difficulty"
-              id="medium"
-              value="medium"
-              onChange={handleChange}
-              required
-            ></input>
-            Medium
-          </label>
-          <label className="control" htmlFor="hard">
-            <input
-              className="mr-1"
-              type="radio"
-              name="difficulty"
-              id="hard"
-              value="hard"
-              onChange={handleChange}
-              required
-            ></input>
-            Hard
-          </label>
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label" htmlFor="numOfQuestions">
+              Number of Questions?
+            </label>
+          </div>
+          <div className="field-body">
+            <div className="field">
+              <input
+                className="input"
+                type="number"
+                name="numOfQuestions"
+                id="numOfQuestions"
+                min="1"
+                max="50"
+                placeholder="Number of Questions"
+                required
+                onChange={handleChange}
+              ></input>
+            </div>
+          </div>
         </div>
 
-        <div className="field is-grouped">
-          <p className="mr-3">
-            <strong>Format</strong>
-          </p>
-          <label className="control" htmlFor="anyType">
-            <input
-              className="mr-1"
-              type="radio"
-              name="format"
-              id="anyType"
-              value="any"
-              onChange={handleChange}
-              required
-            ></input>
-            Any Type
-          </label>
-          <label className="control" htmlFor="multipleChoice">
-            <input
-              className="mr-1"
-              type="radio"
-              name="format"
-              id="multipleChoice"
-              value="multiple"
-              onChange={handleChange}
-              required
-            ></input>
-            Multiple Choice
-          </label>
-          <label className="control" htmlFor="trueFalse">
-            <input
-              className="mr-1"
-              type="radio"
-              name="format"
-              id="trueFalse"
-              value="boolean"
-              onChange={handleChange}
-              required
-            ></input>
-            True/False
-          </label>
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label">Category</label>
+          </div>
+          <div className="field-body">
+            <div className="field">
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  onFocus={handleFocus}
+                  onChange=""
+                ></input>
+              </div>
+              <p className="help is-flex is-align-items-center">
+                <AiOutlineInfoCircle />
+                &nbsp;
+                <button className="modalLink" onClick={openModal}>
+                  Hint: Category List
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="field is-horizontal">
+          <div className="field-label">
+            <label className="label">Difficulty</label>
+          </div>
+          <div className="field-body">
+            <label className="control" htmlFor="anyDifficulty">
+              <input
+                className="mr-1"
+                type="radio"
+                name="difficulty"
+                id="anyDifficulty"
+                value=""
+                onChange={handleChange}
+                required
+              ></input>
+              Any Difficulty
+            </label>
+            <label className="control" htmlFor="easy">
+              <input
+                className="mr-1"
+                type="radio"
+                name="difficulty"
+                id="easy"
+                value="easy"
+                onChange={handleChange}
+                required
+              ></input>
+              Easy
+            </label>
+            <label className="control" htmlFor="medium">
+              <input
+                className="mr-1"
+                type="radio"
+                name="difficulty"
+                id="medium"
+                value="medium"
+                onChange={handleChange}
+                required
+              ></input>
+              Medium
+            </label>
+            <label className="control" htmlFor="hard">
+              <input
+                className="mr-1"
+                type="radio"
+                name="difficulty"
+                id="hard"
+                value="hard"
+                onChange={handleChange}
+                required
+              ></input>
+              Hard
+            </label>
+          </div>
+        </div>
+
+        <div className="field is-horizontal">
+          <div className="field-label">
+            <label className="label">Format</label>
+          </div>
+          <div className="field-body">
+            <label className="control" htmlFor="anyType">
+              <input
+                className="mr-1"
+                type="radio"
+                name="format"
+                id="anyType"
+                value="any"
+                onChange={handleChange}
+                required
+              ></input>
+              Any Type
+            </label>
+            <label className="control" htmlFor="multipleChoice">
+              <input
+                className="mr-1"
+                type="radio"
+                name="format"
+                id="multipleChoice"
+                value="multiple"
+                onChange={handleChange}
+                required
+              ></input>
+              Multiple Choice
+            </label>
+            <label className="control" htmlFor="trueFalse">
+              <input
+                className="mr-1"
+                type="radio"
+                name="format"
+                id="trueFalse"
+                value="boolean"
+                onChange={handleChange}
+                required
+              ></input>
+              True/False
+            </label>
+          </div>
         </div>
 
         <div className="control">
           <input className="button" type="submit"></input>
         </div>
       </form>
+
+      <div className="modal">
+        <div className="modal-background"></div>
+        <div className="modal-content box">
+          <h3 className="title">Categories</h3>
+          <ul>
+            {categoryList.map((cat, key) => (
+              <li key={key}>{categories[cat].name}</li>
+            ))}
+          </ul>
+        </div>
+        <button
+          className="modal-close is-large"
+          aria-label="close"
+          onClick={closeModal}
+        ></button>
+      </div>
     </div>
   );
 }

@@ -16,3 +16,29 @@ main {
     margin: 2rem;
   }
 }
+
+.modalLink {
+  font-size: 0.75rem;
+  color: #485fc7;
+  cursor: pointer !important;
+  text-decoration: none;
+  appearance: auto;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: -internal-light-dark(black, white);
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  border-style: initial;
+  border-color: initial;
+  border-image: initial;
+}

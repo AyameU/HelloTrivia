@@ -15,7 +15,7 @@ export default function Questions({ questions }) {
   const [score, setScore] = useState(0);
 
   console.log("Completed: " + completedQuestions + " | " + questions.length);
-  console.log("Score: " + score + " | " + questions.length);
+  //console.log("Score: " + score + " | " + questions.length);
   function triviaTime() {
     if (completedQuestions < questions.length) {
       return (

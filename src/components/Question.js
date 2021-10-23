@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AddValueToArrayAtRandomIndex,
   RenderHTML
@@ -43,21 +43,22 @@ export default function Question({
     );
   }
 
-  setAnswered(false);
-
   // Validates the user's choice and updates the answered state.
   function validateChoice(e) {
     e.preventDefault();
-    console.log(score);
-    // disable buttons
-    // validate
-    if (e.target.value === correct_answer && e.target.checked) {
+
+    const target = e.target;
+
+    if (type === "multiple") console.log("Checked: " + target.value);
+
+    if (target.value === correct_answer) {
       setScore((score) => score + 1);
+
       if (type === "boolean")
-        e.target.classList.add("has-text-white", "has-background-success");
+        target.classList.add("has-text-white", "has-background-success");
     } else {
       if (type === "boolean")
-        e.target.classList.add("has-text-white", "has-background-danger");
+        target.classList.add("has-text-white", "has-background-danger");
     }
 
     setAnswered(true);
@@ -76,7 +77,7 @@ export default function Question({
           <button
             name="False"
             id="False"
-            value="Falses"
+            value="False"
             onClick={validateChoice}
           >
             False
@@ -113,7 +114,12 @@ export default function Question({
       document.querySelector("#True").className = "is-large button";
       document.querySelector("#False").className = "is-large button";
     }
+
+    // Sets answered to false after each new question is rendered.
+    setAnswered(false);
   }, [q]);
+
+  console.log(correct_answer);
 
   return (
     <div className="card">

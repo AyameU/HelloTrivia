@@ -53,14 +53,14 @@ export default function Questions({ questions }) {
   }, [answered]);
 
   return (
-    <>
-      <section className="container has-text-centered my-5">
+    <section id="questions">
+      <div className="container has-text-centered my-5">
         <h4 className="subtitle is-6">Current Score</h4>
         <p className="title is-4">
           {score} out of {questions.length}
         </p>
-      </section>
-      <section>{triviaTime()}</section>
-    </>
+      </div>
+      <div>{triviaTime()}</div>
+    </section>
   );
 }

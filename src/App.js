@@ -37,17 +37,19 @@ export default function App() {
   return (
     <>
       <Header />
-      <Search
-        player={player}
-        setPlayer={setPlayer}
-        categories={categories}
-        query={query}
-        setQuery={setQuery}
-        setErrorMessage={setErrorMessage}
-        questions={questions}
-        setQuestions={setQuestions}
-      />
-      {showQuestions()}
+      <main>
+        <Search
+          player={player}
+          setPlayer={setPlayer}
+          categories={categories}
+          query={query}
+          setQuery={setQuery}
+          setErrorMessage={setErrorMessage}
+          questions={questions}
+          setQuestions={setQuestions}
+        />
+        {showQuestions()}
+      </main>
       <Footer />
     </>
   );

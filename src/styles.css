@@ -6,3 +6,9 @@
 h1 {
   font-family: "Bungee Shade", sans-serif;
 }
+
+@media screen and (max-width: 1024px) {
+  main {
+    margin: 2rem;
+  }
+}

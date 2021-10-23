@@ -9,8 +9,8 @@ export default function App() {
   // The state variable and setter are then passed down and updated in
   // the child component, instead of doing everything in the component.
   const [player, setPlayer] = useState("Player");
-  const [categories, setCategories] = useState(null);
-  const [query, setQuery] = useState(null);
+  const [categories, setCategories] = useState("");
+  const [query, setQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [questions, setQuestions] = useState(null);
 

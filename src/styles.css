@@ -17,7 +17,7 @@ main {
   }
 }
 
-.modalLink {
+.buttonLooksLikeLink {
   font-size: 0.75rem;
   color: #485fc7;
   cursor: pointer !important;

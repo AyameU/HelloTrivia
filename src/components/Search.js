@@ -13,15 +13,19 @@ export default function Search({
   categories,
   query,
   setQuery,
+  errorMessage,
   setErrorMessage,
+  questions,
   setQuestions
 }) {
   const categoryList = Object.keys(categories);
   const [number, setNumber] = useState("");
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [format, setFormat] = useState("");
 
+  // Opens the modal window, displays the category list
+  // and disables scrolling on the page.
   function openModal(e) {
     e.preventDefault();
 
@@ -31,6 +35,8 @@ export default function Search({
     html.classList.add("is-clipped");
   }
 
+  // Closes the categoryList modal window and sets the
+  // classNames back to their initial states.
   function closeModal(e) {
     e.preventDefault();
 
@@ -47,7 +53,35 @@ export default function Search({
 
   // Handles the onChange event of the form inputs.
   function handleChange(e) {
+    setErrorMessage("");
+
     switch (e.target.name) {
+      case "category":
+        // Bit of a hacky solution to include search fuctionality.
+        // A select would work better frankly, but I don't want to lose marks.
+
+        // Get all of the keys from the categories.
+        const categoryKeys = Object.keys(categories);
+        const value = e.target.value;
+        let validCategory = false;
+        let validCategoryId;
+
+        // Check if the input value exists within the categories fetched from the api.
+        for (const key of categoryKeys) {
+          if (value === categories[key].name) {
+            validCategoryId = categories[key].id;
+            console.log(key);
+            validCategory = true;
+            break;
+          }
+        }
+
+        if (validCategory) {
+          setCategory(validCategoryId);
+          setErrorMessage("");
+        } else setErrorMessage(getErrorMessage(2));
+
+        break;
       case "numOfQuestions":
         setNumber(e.target.value);
         break;
@@ -74,10 +108,12 @@ export default function Search({
   function handleSubmit(e) {
     e.preventDefault();
 
+    const query = getQuery();
+
     // Sets the query to the values from the form.
     // Updating the query state triggers useEffect,
     // which fetches the data.
-    setQuery(getQuery());
+    setQuery(query);
   }
 
   // Gets the API query based on the inputs from the form.
@@ -90,7 +126,7 @@ export default function Search({
     for (let i = 0; i < searchTerms.length; i++) {
       if (searchTerms[i] === null || searchTerms[i] === "") {
         continue;
-      } else if (searchTerms[i] !== "") {
+      } else if (searchTerms[i] !== null || searchTerms[i] !== "") {
         if (i === 0) {
           tempQuery += keywords[i] + searchTerms[i];
         } else {
@@ -105,30 +141,22 @@ export default function Search({
   // Gets the error message based on the response code from the API fetch.
   function getErrorMessage(responseCode) {
     let errorMessage = "";
-    let categoryNum = category - 9;
 
     switch (responseCode) {
       case 1:
         errorMessage =
-          "No results found. There aren't enough questions in " +
-          difficulty +
-          " " +
-          categories[categoryNum].name +
-          ". Enter a smaller number.";
+          "No results found. There aren't enough questions in that category.";
         break;
       case 2:
-        errorMessage = "Invalid parameter(s).";
+        errorMessage =
+          "Not a valid category. Check out the list of category topics.";
         break;
       case 3:
         errorMessage = "Session Token Not Found.";
         break;
       case 4:
         errorMessage =
-          "Congrats! You've completed all of the questions for " +
-          difficulty +
-          " " +
-          categories[categoryNum].name +
-          ". Pick another category.";
+          "Congrats! You've completed all of the questions for yor category. Pick another one!";
         break;
       default:
         errorMessage = "";
@@ -160,11 +188,15 @@ export default function Search({
           }
         });
     }
-  }, [query, setQuestions]);
+  }, [query]);
 
-  console.log(categoryList);
-  console.log(categories);
-  //console.log(query);
+  useEffect(() => {
+    // const submitButton = document.querySelector("#submit");
+    // if(errorMessage === "") submitButton.disabled = false;
+    // else submitButton.disabled = true;
+
+    document.querySelector("#submit").disabled = errorMessage !== "";
+  }, [errorMessage]);
 
   return (
     <div className="box container has-text-centered">
@@ -172,14 +204,14 @@ export default function Search({
       <h2 className="title">Set up your game</h2>
 
       <form className="form" onSubmit={handleSubmit}>
-        <div class="field is-horizontal is-align-items-center">
-          <div class="field-label">
-            <label class="label" htmlFor="playerName">
+        <div className="field is-horizontal is-align-items-center">
+          <div className="field-label">
+            <label className="label" htmlFor="playerName">
               Type your Name
             </label>
           </div>
-          <div class="field-body">
-            <div class="field">
+          <div className="field-body">
+            <div className="field">
               <input
                 className="input"
                 type="text"
@@ -225,14 +257,15 @@ export default function Search({
                 <input
                   className="input"
                   type="text"
+                  name="category"
                   onFocus={handleFocus}
-                  onChange=""
+                  onChange={handleChange}
                 ></input>
               </div>
               <p className="help is-flex is-align-items-center">
                 <AiOutlineInfoCircle />
                 &nbsp;
-                <button className="modalLink" onClick={openModal}>
+                <button className="buttonLooksLikeLink" onClick={openModal}>
                   Hint: Category List
                 </button>
               </p>
@@ -355,7 +388,7 @@ export default function Search({
         </div>
 
         <div className="control">
-          <input className="button" type="submit"></input>
+          <input className="button" id="submit" type="submit"></input>
         </div>
       </form>
 

@@ -49,8 +49,6 @@ export default function Question({
 
     const target = e.target;
 
-    if (type === "multiple") console.log("Checked: " + target.value);
-
     if (target.value === correct_answer) {
       setScore((score) => score + 1);
 
@@ -118,8 +116,6 @@ export default function Question({
     // Sets answered to false after each new question is rendered.
     setAnswered(false);
   }, [q]);
-
-  console.log(correct_answer);
 
   return (
     <div className="card">

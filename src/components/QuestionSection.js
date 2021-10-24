@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Question from "./Question";
+import { BiArrowBack } from "react-icons/bi";
 
 // 1. Show first question
 // 2. User clicks a button to make a choice
@@ -9,13 +10,11 @@ import Question from "./Question";
 // 6. Hide old question
 // 7. Show next question (could use completedQuestions to get index of array)
 
-export default function Questions({ questions }) {
+export default function Questions({ questions, setQuestions, setQuery }) {
   const [completedQuestions, setCompletedQuestions] = useState(0);
   const [answered, setAnswered] = useState(false);
   const [score, setScore] = useState(0);
 
-  console.log("Completed: " + completedQuestions + " | " + questions.length);
-  //console.log("Score: " + score + " | " + questions.length);
   function triviaTime() {
     if (completedQuestions < questions.length) {
       return (
@@ -35,6 +34,13 @@ export default function Questions({ questions }) {
         </div>
       );
     }
+  }
+
+  function closeGame(e) {
+    e.preventDefault();
+
+    setQuestions(null);
+    setQuery("");
   }
 
   // Sets the completedQuestions, Answered and Score states to their initial state when the question bank is updated.
@@ -60,7 +66,18 @@ export default function Questions({ questions }) {
           {score} out of {questions.length}
         </p>
       </div>
+
       <div>{triviaTime()}</div>
+
+      <div className="has-text-centered mt-5">
+        <button
+          className="button closeGame has-background-danger has-text-white"
+          onClick={closeGame}
+        >
+          <BiArrowBack size="2rem" color="white" />
+          &nbsp; Return to Setup
+        </button>
+      </div>
     </section>
   );
 }

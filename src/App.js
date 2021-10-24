@@ -14,14 +14,6 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [questions, setQuestions] = useState(null);
 
-  // Show the question section after a successful API fetch
-  // or display an error message.
-  function showQuestions() {
-    if (questions !== null)
-      return <QuestionSection questions={questions.results} />;
-    else return <p>{errorMessage}</p>;
-  }
-
   // Grabs the list of trivia categories to populate the select element.
   useEffect(() => {
     fetch("https://opentdb.com/api_category.php")
@@ -29,26 +21,36 @@ export default function App() {
       .then((result) => setCategories(result.trivia_categories));
   }, []);
 
-  //console.log(categories);
+  console.log(categories);
   //console.log(query);
-  console.log(errorMessage);
-  console.log(questions);
+  //console.log(errorMessage);
+  //console.log(questions);
 
   return (
     <>
       <Header />
       <main>
-        <Search
-          player={player}
-          setPlayer={setPlayer}
-          categories={categories}
-          query={query}
-          setQuery={setQuery}
-          setErrorMessage={setErrorMessage}
-          questions={questions}
-          setQuestions={setQuestions}
-        />
-        {showQuestions()}
+        {!questions && (
+          <Search
+            player={player}
+            setPlayer={setPlayer}
+            categories={categories}
+            query={query}
+            setQuery={setQuery}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+            questions={questions}
+            setQuestions={setQuestions}
+          />
+        )}
+        {questions && (
+          <QuestionSection
+            questions={questions.results}
+            setQuestions={setQuestions}
+            setQuery={setQuery}
+          />
+        )}
+        <p>{errorMessage}</p>
       </main>
       <Footer />
     </>

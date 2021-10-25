@@ -95,10 +95,6 @@ export default function Search({
           ? setFormat(e.target.value)
           : setFormat(null);
         break;
-      case "playerName":
-        if (e.target.value !== "") setPlayer(e.target.value);
-        else setPlayer("Player");
-        break;
       default:
         break;
     }
@@ -198,9 +194,11 @@ export default function Search({
     document.querySelector("#submit").disabled = errorMessage !== "";
   }, [errorMessage]);
 
+  console.log(category);
+
   return (
     <div className="box container has-text-centered">
-      <p className="subtitle">Hello, {player}</p>
+      <p className="subtitle">Hello {player}</p>
       <h2 className="title">Set up your game</h2>
 
       <form className="form" onSubmit={handleSubmit}>
@@ -217,8 +215,12 @@ export default function Search({
                 type="text"
                 name="playerName"
                 value={player}
-                onChange={handleChange}
+                onChange={(e) => setPlayer(e.target.value)}
+                onBlur={(e) => {
+                  if (e.target.value.trim() === "") setPlayer("Player");
+                }}
                 onFocus={handleFocus}
+                placeholder="Enter Your Name"
               ></input>
             </div>
           </div>
@@ -260,6 +262,8 @@ export default function Search({
                   name="category"
                   onFocus={handleFocus}
                   onChange={handleChange}
+                  placeholder="Search for a Category"
+                  required
                 ></input>
               </div>
               <p className="help is-flex is-align-items-center">
@@ -393,17 +397,27 @@ export default function Search({
       </form>
 
       <div className="modal">
-        <div className="modal-background"></div>
+        <div className="modal-background" onClick={closeModal}></div>
         <div className="modal-content box">
           <h3 className="title">Categories</h3>
           <ul>
             {categoryList.map((cat, key) => (
-              <li key={key}>{categories[cat].name}</li>
+              <li key={key}>
+                <button
+                  className="buttonLooksLikeLink"
+                  onClick={(e) => {
+                    setCategory(e.target.value);
+                    closeModal(e);
+                  }}
+                >
+                  {categories[cat].name}
+                </button>
+              </li>
             ))}
           </ul>
         </div>
         <button
-          className="modal-close is-large"
+          className="button modal-close"
           aria-label="close"
           onClick={closeModal}
         ></button>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Question from "./Question";
-import { BiArrowBack } from "react-icons/bi";
+import { BiArrowBack, BiTrophy, BiGhost } from "react-icons/bi";
 
 // 1. Show first question
 // 2. User clicks a button to make a choice
@@ -28,11 +28,35 @@ export default function Questions({ questions, setQuestions, setQuery }) {
       );
     }
     if (completedQuestions === questions.length) {
-      return (
-        <div className="container has-text-centered">
-          <p>Good job! Setup your game to play again!</p>
-        </div>
-      );
+      let congratsOrNot;
+
+      // End of game text changes depending on outcomes.
+      if (score === questions.length) {
+        return (
+          <div className="container">
+            <p className="is-flex is-align-items-center is-justify-content-center">
+              <BiTrophy />
+              &nbsp;100%! Great job! Setup your game to play again!
+            </p>
+          </div>
+        );
+      } else if (score === 0) {
+        return (
+          <div className="container">
+            <p className="is-flex is-align-items-center is-justify-content-center">
+              You lose... your head!&nbsp;
+              <BiGhost />
+              &nbsp;Kidding... Setup your game to play again!
+            </p>
+          </div>
+        );
+      } else {
+        return (
+          <div className="container has-text-centered">
+            <p>Good job! Setup your game to play again!</p>
+          </div>
+        );
+      }
     }
   }
 

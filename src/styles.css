@@ -17,6 +17,11 @@ main {
   }
 }
 
+#submit:hover {
+  background-color: black;
+  color: white;
+}
+
 .buttonLooksLikeLink {
   font-size: 0.75rem;
   color: #485fc7;

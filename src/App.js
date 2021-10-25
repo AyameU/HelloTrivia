@@ -76,7 +76,6 @@ export default function App() {
     if (query !== "") {
       const URL = url + query + "&" + sessionToken;
       const encodeURL = encodeURI(URL);
-      console.log(URL);
 
       fetch(encodeURL)
         .then((response) => response.json())
@@ -109,12 +108,8 @@ export default function App() {
             player={player}
             setPlayer={setPlayer}
             categories={categories}
-            query={query}
             setQuery={setQuery}
-            errorMessage={errorMessage}
             setErrorMessage={setErrorMessage}
-            questions={questions}
-            setQuestions={setQuestions}
             getErrorMessage={getErrorMessage}
           />
         )}

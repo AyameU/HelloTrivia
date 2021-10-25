@@ -1,26 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { OpenModal, CloseModal } from "./Modal";
-
-// ToDo
-// 1. Get search query DONE
-// 2. Fetch data
-// 3. Save data to State object
-// 3. Display data
 
 export default function Search({
   player,
   setPlayer,
   categories,
-  query,
   setQuery,
-  errorMessage,
   setErrorMessage,
-  questions,
-  setQuestions,
   getErrorMessage
 }) {
-  const categoryNames = categories.map((c) => c.name);
+  const categoryKeys = Object.keys(categories);
+  const categoryNames = categoryKeys.map((c) => categories[c].name).sort();
   const [number, setNumber] = useState("");
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
@@ -36,7 +27,6 @@ export default function Search({
     // A select would work better frankly, but I don't want to lose marks.
 
     // Get all of the keys from the categories.
-    const categoryKeys = Object.keys(categories);
     const value = document.querySelector("#category").value;
     let validCategory = false;
     let validCategoryId;
@@ -56,41 +46,12 @@ export default function Search({
     } else setErrorMessage(getErrorMessage(2));
   }
 
-  // Handles the onChange event of the form inputs.
+  // Handles the onChange event of the form number input.
   function handleChange(e) {
     setErrorMessage("");
 
-    switch (e.target.name) {
-      case "category":
-        // Bit of a hacky solution to include search fuctionality.
-        // A select would work better frankly, but I don't want to lose marks.
-
-        // Get all of the keys from the categories.
-        const categoryKeys = Object.keys(categories);
-        const value = e.target.value;
-        let validCategory = false;
-        let validCategoryId;
-
-        // Check if the input value exists within the categories fetched from the api.
-        for (const key of categoryKeys) {
-          if (value === categories[key].name) {
-            validCategoryId = categories[key].id;
-            validCategory = true;
-            break;
-          }
-        }
-
-        if (validCategory) {
-          setCategory(validCategoryId);
-          setErrorMessage("");
-        } else setErrorMessage(getErrorMessage(2));
-
-        break;
-      case "numOfQuestions":
-        setNumber(e.target.value);
-        break;
-      default:
-        break;
+    if (e.target.name === "numOfQuestions") {
+      setNumber(e.target.value);
     }
   }
 

@@ -2,14 +2,6 @@ import { useEffect, useState } from "react";
 import Question from "./Question";
 import { BiArrowBack, BiTrophy, BiGhost } from "react-icons/bi";
 
-// 1. Show first question
-// 2. User clicks a button to make a choice
-// 3. choice is validated
-// 4. depending on outcome show a Yay or Nay message
-// 5. Increment completedQuestions by 1
-// 6. Hide old question
-// 7. Show next question (could use completedQuestions to get index of array)
-
 export default function Questions({ questions, setQuestions, setQuery }) {
   const [completedQuestions, setCompletedQuestions] = useState(0);
   const [answered, setAnswered] = useState(false);

@@ -4,18 +4,6 @@ import {
   RenderHTML
 } from "../utils/UtilityFunctions";
 
-// 1. Display question
-// 2. User clicks a button
-// 3. Disable buttons?
-// 4. Validate choice
-// 5. If correct yay!, if incorrect boo!
-// 6. setCompleted + 1
-
-// Multiple choice
-// Grab incorrect answers array
-// Create new array and add correct answer in random index.
-// Map over that index to display radioboxes.
-
 export default function Question({
   q,
   setAnswered,

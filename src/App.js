@@ -50,7 +50,7 @@ export default function App() {
         break;
       case 4:
         errorMessage =
-          "Congrats! You've completed all of the questions for yor category. Pick another one!";
+          "Congrats! You've completed all of the questions for your category. Pick another category or reset your session token.";
         break;
       default:
         errorMessage = "";
@@ -102,7 +102,7 @@ export default function App() {
 
   return (
     <>
-      <Header />
+      <Header getRefreshToken={resetSessionToken} />
       <main>
         {!questions && (
           <Search

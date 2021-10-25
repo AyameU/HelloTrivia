@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { OpenModal, CloseModal } from "./Modal";
+import { RenderHTML } from "../utils/UtilityFunctions";
 
 // ToDo
 // 1. Get search query DONE
@@ -20,33 +22,33 @@ export default function Search({
   getErrorMessage
 }) {
   const categoryList = Object.keys(categories);
-  const [categoryInput, setCategoryInput] = useState();
+  // const [categoryInput, setCategoryInput] = useState();
   const [number, setNumber] = useState("");
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [format, setFormat] = useState("");
 
-  // Opens the modal window, displays the category list
-  // and disables scrolling on the page.
-  function openModal(e) {
-    e.preventDefault();
+  // // Opens the modal window, displays the category list
+  // // and disables scrolling on the page.
+  // function openModal(e) {
+  //   e.preventDefault();
 
-    const modal = document.querySelector(".modal");
-    const html = document.querySelector("html");
-    modal.classList.add("is-active");
-    html.classList.add("is-clipped");
-  }
+  //   const modal = document.querySelector(".modal");
+  //   const html = document.querySelector("html");
+  //   modal.classList.add("is-active");
+  //   html.classList.add("is-clipped");
+  // }
 
-  // Closes the categoryList modal window and sets the
-  // classNames back to their initial states.
-  function closeModal(e) {
-    e.preventDefault();
+  // // Closes the categoryList modal window and sets the
+  // // classNames back to their initial states.
+  // function closeModal(e) {
+  //   e.preventDefault();
 
-    const modal = document.querySelector(".modal");
-    const html = document.querySelector("html");
-    modal.classList.remove("is-active");
-    html.classList.remove("is-clipped");
-  }
+  //   const modal = document.querySelector(".modal");
+  //   const html = document.querySelector("html");
+  //   modal.classList.remove("is-active");
+  //   html.classList.remove("is-clipped");
+  // }
 
   // Handles the onFocus event of the player name input.
   function handleFocus(e) {
@@ -150,62 +152,6 @@ export default function Search({
     return tempQuery;
   }
 
-  // // Gets the error message based on the response code from the API fetch.
-  // function getErrorMessage(responseCode) {
-  //   let errorMessage = "";
-
-  //   switch (responseCode) {
-  //     case 1:
-  //       errorMessage =
-  //         "No results found. There aren't enough questions in that category.";
-  //       break;
-  //     case 2:
-  //       errorMessage =
-  //         "Not a valid category. Check out the list of category topics.";
-  //       break;
-  //     case 3:
-  //       errorMessage = "Session Token Not Found.";
-  //       break;
-  //     case 4:
-  //       errorMessage =
-  //         "Congrats! You've completed all of the questions for yor category. Pick another one!";
-  //       break;
-  //     default:
-  //       errorMessage = "";
-  //       break;
-  //   }
-
-  //   return errorMessage;
-  // }
-
-  //Code 1: No Results Could not return results. The API doesn't have enough questions for your query. (Ex. Asking for 50 Questions in a Category that only has 20.)
-  //Code 2: Invalid Parameter Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)
-  //Code 3: Token Not Found Session Token does not exist.
-  //Code 4: Token Empty Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.
-
-  // useEffect(() => {
-  //   const url = "https://opentdb.com/api.php?";
-
-  //   if (query !== "") {
-  //     const URL = url + query;
-  //     const encodeURL = encodeURI(URL);
-
-  //     fetch(encodeURL)
-  //       .then((response) => response.json())
-  //       .then((result) => {
-  //         if (result.response_code === 0) {
-  //           setQuestions(result);
-  //         } else {
-  //           setErrorMessage(getErrorMessage(result.response_code));
-  //         }
-  //       });
-  //   }
-  // }, [query]);
-
-  useEffect(() => {
-    document.querySelector("#submit").disabled = errorMessage !== "";
-  }, [errorMessage]);
-
   return (
     <div className="box container has-text-centered">
       <p className="subtitle">Hello {player}</p>
@@ -280,7 +226,10 @@ export default function Search({
               <p className="help is-flex is-align-items-center">
                 <AiOutlineInfoCircle />
                 &nbsp;
-                <button className="buttonLooksLikeLink" onClick={openModal}>
+                <button
+                  className="buttonLooksLikeLink"
+                  onClick={(e) => OpenModal(e, "categoryList")}
+                >
                   Hint: Category List
                 </button>
               </p>
@@ -407,8 +356,11 @@ export default function Search({
         </div>
       </form>
 
-      <div className="modal">
-        <div className="modal-background" onClick={closeModal}></div>
+      <div id="categoryList" className="modal">
+        <div
+          className="modal-background"
+          onClick={(e) => CloseModal(e, "categoryList")}
+        ></div>
         <div className="modal-content box">
           <h3 className="title">Categories</h3>
           <ul>
@@ -418,9 +370,9 @@ export default function Search({
                   className="buttonLooksLikeLink"
                   onClick={(e) => {
                     const input = document.querySelector("#category");
-                    input.value = e.target.innerHTML;
+                    input.value = RenderHTML(e.target.innerHTML);
                     validateCategory();
-                    closeModal(e);
+                    CloseModal(e, "categoryList");
                   }}
                 >
                   {categories[cat].name}
@@ -432,7 +384,7 @@ export default function Search({
         <button
           className="button modal-close"
           aria-label="close"
-          onClick={closeModal}
+          onClick={(e) => CloseModal(e, "categoryList")}
         ></button>
       </div>
     </div>

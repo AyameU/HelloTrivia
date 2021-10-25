@@ -17,7 +17,7 @@ export function AddValueToArrayAtRandomIndex(array, value) {
   return newArray;
 }
 
-// Renders a string containing HTML tags with the correct markup.
+// Renders a string containing HTML tags with the correct markup in a span tag.
 export function RenderHTML(text) {
   return <span dangerouslySetInnerHTML={{ __html: text }}></span>;
 }

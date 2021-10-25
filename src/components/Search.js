@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { OpenModal, CloseModal } from "./Modal";
-import { RenderHTML } from "../utils/UtilityFunctions";
 
 // ToDo
 // 1. Get search query DONE
@@ -21,36 +20,13 @@ export default function Search({
   setQuestions,
   getErrorMessage
 }) {
-  const categoryList = Object.keys(categories);
-  // const [categoryInput, setCategoryInput] = useState();
+  const categoryNames = categories.map((c) => c.name);
   const [number, setNumber] = useState("");
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [format, setFormat] = useState("");
 
-  // // Opens the modal window, displays the category list
-  // // and disables scrolling on the page.
-  // function openModal(e) {
-  //   e.preventDefault();
-
-  //   const modal = document.querySelector(".modal");
-  //   const html = document.querySelector("html");
-  //   modal.classList.add("is-active");
-  //   html.classList.add("is-clipped");
-  // }
-
-  // // Closes the categoryList modal window and sets the
-  // // classNames back to their initial states.
-  // function closeModal(e) {
-  //   e.preventDefault();
-
-  //   const modal = document.querySelector(".modal");
-  //   const html = document.querySelector("html");
-  //   modal.classList.remove("is-active");
-  //   html.classList.remove("is-clipped");
-  // }
-
-  // Handles the onFocus event of the player name input.
+  // Handles the onFocus event of the form inputs.
   function handleFocus(e) {
     e.target.select();
   }
@@ -364,18 +340,18 @@ export default function Search({
         <div className="modal-content box">
           <h3 className="title">Categories</h3>
           <ul>
-            {categoryList.map((cat, key) => (
+            {categoryNames.map((cat, key) => (
               <li key={key}>
                 <button
                   className="buttonLooksLikeLink"
                   onClick={(e) => {
                     const input = document.querySelector("#category");
-                    input.value = RenderHTML(e.target.innerHTML);
+                    input.value = cat;
                     validateCategory();
                     CloseModal(e, "categoryList");
                   }}
                 >
-                  {categories[cat].name}
+                  {cat}
                 </button>
               </li>
             ))}

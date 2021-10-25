@@ -16,7 +16,8 @@ export default function Search({
   errorMessage,
   setErrorMessage,
   questions,
-  setQuestions
+  setQuestions,
+  getErrorMessage
 }) {
   const categoryList = Object.keys(categories);
   const [categoryInput, setCategoryInput] = useState();
@@ -66,7 +67,6 @@ export default function Search({
     for (const key of categoryKeys) {
       if (value === categories[key].name) {
         validCategoryId = categories[key].id;
-        console.log(key);
         validCategory = true;
         break;
       }
@@ -97,7 +97,6 @@ export default function Search({
         for (const key of categoryKeys) {
           if (value === categories[key].name) {
             validCategoryId = categories[key].id;
-            console.log(key);
             validCategory = true;
             break;
           }
@@ -151,68 +150,61 @@ export default function Search({
     return tempQuery;
   }
 
-  // Gets the error message based on the response code from the API fetch.
-  function getErrorMessage(responseCode) {
-    let errorMessage = "";
+  // // Gets the error message based on the response code from the API fetch.
+  // function getErrorMessage(responseCode) {
+  //   let errorMessage = "";
 
-    switch (responseCode) {
-      case 1:
-        errorMessage =
-          "No results found. There aren't enough questions in that category.";
-        break;
-      case 2:
-        errorMessage =
-          "Not a valid category. Check out the list of category topics.";
-        break;
-      case 3:
-        errorMessage = "Session Token Not Found.";
-        break;
-      case 4:
-        errorMessage =
-          "Congrats! You've completed all of the questions for yor category. Pick another one!";
-        break;
-      default:
-        errorMessage = "";
-        break;
-    }
+  //   switch (responseCode) {
+  //     case 1:
+  //       errorMessage =
+  //         "No results found. There aren't enough questions in that category.";
+  //       break;
+  //     case 2:
+  //       errorMessage =
+  //         "Not a valid category. Check out the list of category topics.";
+  //       break;
+  //     case 3:
+  //       errorMessage = "Session Token Not Found.";
+  //       break;
+  //     case 4:
+  //       errorMessage =
+  //         "Congrats! You've completed all of the questions for yor category. Pick another one!";
+  //       break;
+  //     default:
+  //       errorMessage = "";
+  //       break;
+  //   }
 
-    return errorMessage;
-  }
+  //   return errorMessage;
+  // }
 
   //Code 1: No Results Could not return results. The API doesn't have enough questions for your query. (Ex. Asking for 50 Questions in a Category that only has 20.)
   //Code 2: Invalid Parameter Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)
   //Code 3: Token Not Found Session Token does not exist.
   //Code 4: Token Empty Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.
 
+  // useEffect(() => {
+  //   const url = "https://opentdb.com/api.php?";
+
+  //   if (query !== "") {
+  //     const URL = url + query;
+  //     const encodeURL = encodeURI(URL);
+
+  //     fetch(encodeURL)
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         if (result.response_code === 0) {
+  //           setQuestions(result);
+  //         } else {
+  //           setErrorMessage(getErrorMessage(result.response_code));
+  //         }
+  //       });
+  //   }
+  // }, [query]);
+
   useEffect(() => {
-    const url = "https://opentdb.com/api.php?";
-
-    if (query !== "") {
-      const URL = url + query;
-      const encodeURL = encodeURI(URL);
-
-      fetch(encodeURL)
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.response_code === 0) {
-            setQuestions(result);
-          } else {
-            setErrorMessage(getErrorMessage(result.response_code));
-          }
-        });
-    }
-  }, [query]);
-
-  useEffect(() => {
-    // const submitButton = document.querySelector("#submit");
-    // if(errorMessage === "") submitButton.disabled = false;
-    // else submitButton.disabled = true;
-
     document.querySelector("#submit").disabled = errorMessage !== "";
   }, [errorMessage]);
-
-  console.log(difficulty);
-  console.log(format);
 
   return (
     <div className="box container has-text-centered">

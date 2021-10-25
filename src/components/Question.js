@@ -18,10 +18,9 @@ import {
 
 export default function Question({
   q,
-  answered,
   setAnswered,
-  score,
-  setScore
+  setScore,
+  completedQuestions
 }) {
   const {
     category,
@@ -120,7 +119,7 @@ export default function Question({
   return (
     <div className="card">
       <div className="card-content has-text-centered has-background-warning">
-        <p className="subtitle">Question {answered}</p>
+        <p className="subtitle">Question {completedQuestions + 1}</p>
         <p className="title is-3">{RenderHTML(question)}</p>
         <form className="is-inline-block">
           <div className="has-text-left">{setQuestionControls()}</div>

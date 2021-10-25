@@ -19,6 +19,7 @@ export default function Search({
   setQuestions
 }) {
   const categoryList = Object.keys(categories);
+  const [categoryInput, setCategoryInput] = useState();
   const [number, setNumber] = useState("");
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
@@ -49,6 +50,32 @@ export default function Search({
   // Handles the onFocus event of the player name input.
   function handleFocus(e) {
     e.target.select();
+  }
+
+  function validateCategory() {
+    // Bit of a hacky solution to include search fuctionality.
+    // A select would work better frankly, but I don't want to lose marks.
+
+    // Get all of the keys from the categories.
+    const categoryKeys = Object.keys(categories);
+    const value = document.querySelector("#category").value;
+    let validCategory = false;
+    let validCategoryId;
+
+    // Check if the input value exists within the categories fetched from the api.
+    for (const key of categoryKeys) {
+      if (value === categories[key].name) {
+        validCategoryId = categories[key].id;
+        console.log(key);
+        validCategory = true;
+        break;
+      }
+    }
+
+    if (validCategory) {
+      setCategory(validCategoryId);
+      setErrorMessage("");
+    } else setErrorMessage(getErrorMessage(2));
   }
 
   // Handles the onChange event of the form inputs.
@@ -84,16 +111,6 @@ export default function Search({
         break;
       case "numOfQuestions":
         setNumber(e.target.value);
-        break;
-      case "difficulty":
-        e.target.checked && e.target.name !== "anyDifficulty"
-          ? setDifficulty(e.target.value)
-          : setDifficulty(null);
-        break;
-      case "format":
-        e.target.value !== "any" && e.target.checked
-          ? setFormat(e.target.value)
-          : setFormat(null);
         break;
       default:
         break;
@@ -194,7 +211,8 @@ export default function Search({
     document.querySelector("#submit").disabled = errorMessage !== "";
   }, [errorMessage]);
 
-  console.log(category);
+  console.log(difficulty);
+  console.log(format);
 
   return (
     <div className="box container has-text-centered">
@@ -259,9 +277,10 @@ export default function Search({
                 <input
                   className="input"
                   type="text"
+                  id="category"
                   name="category"
                   onFocus={handleFocus}
-                  onChange={handleChange}
+                  onChange={validateCategory}
                   placeholder="Search for a Category"
                   required
                 ></input>
@@ -290,7 +309,7 @@ export default function Search({
                   name="difficulty"
                   id="anyDifficulty"
                   value=""
-                  onChange={handleChange}
+                  onChange={(e) => setDifficulty(e.target.value)}
                   required
                 ></input>
                 Any Difficulty
@@ -304,7 +323,7 @@ export default function Search({
                   name="difficulty"
                   id="easy"
                   value="easy"
-                  onChange={handleChange}
+                  onChange={(e) => setDifficulty(e.target.value)}
                   required
                 ></input>
                 Easy
@@ -318,7 +337,7 @@ export default function Search({
                   name="difficulty"
                   id="medium"
                   value="medium"
-                  onChange={handleChange}
+                  onChange={(e) => setDifficulty(e.target.value)}
                   required
                 ></input>
                 Medium
@@ -332,7 +351,7 @@ export default function Search({
                   name="difficulty"
                   id="hard"
                   value="hard"
-                  onChange={handleChange}
+                  onChange={(e) => setDifficulty(e.target.value)}
                   required
                 ></input>
                 Hard
@@ -353,8 +372,8 @@ export default function Search({
                   type="radio"
                   name="format"
                   id="anyType"
-                  value="any"
-                  onChange={handleChange}
+                  value={null}
+                  onChange={(e) => setFormat(e.target.value)}
                   required
                 ></input>
                 Any Type
@@ -368,7 +387,7 @@ export default function Search({
                   name="format"
                   id="multipleChoice"
                   value="multiple"
-                  onChange={handleChange}
+                  onChange={(e) => setFormat(e.target.value)}
                   required
                 ></input>
                 Multiple Choice
@@ -382,7 +401,7 @@ export default function Search({
                   name="format"
                   id="trueFalse"
                   value="boolean"
-                  onChange={handleChange}
+                  onChange={(e) => setFormat(e.target.value)}
                   required
                 ></input>
                 True/False
@@ -406,7 +425,9 @@ export default function Search({
                 <button
                   className="buttonLooksLikeLink"
                   onClick={(e) => {
-                    setCategory(e.target.value);
+                    const input = document.querySelector("#category");
+                    input.value = e.target.innerHTML;
+                    validateCategory();
                     closeModal(e);
                   }}
                 >

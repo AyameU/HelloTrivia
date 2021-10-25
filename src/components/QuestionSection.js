@@ -20,16 +20,13 @@ export default function Questions({ questions, setQuestions, setQuery }) {
       return (
         <Question
           q={questions[completedQuestions]}
-          answered={answered}
           setAnswered={setAnswered}
-          score={score}
           setScore={setScore}
+          completedQuestions={completedQuestions}
         />
       );
     }
     if (completedQuestions === questions.length) {
-      let congratsOrNot;
-
       // End of game text changes depending on outcomes.
       if (score === questions.length) {
         return (

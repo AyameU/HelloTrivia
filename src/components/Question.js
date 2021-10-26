@@ -35,17 +35,7 @@ export default function Question({
     e.preventDefault();
 
     const target = e.target;
-
-    if (target.value === correct_answer) {
-      setScore((score) => score + 1);
-
-      if (type === "boolean")
-        target.classList.add("has-text-white", "has-background-success");
-    } else {
-      if (type === "boolean")
-        target.classList.add("has-text-white", "has-background-danger");
-    }
-
+    if (target.value === correct_answer) setScore((score) => score + 1);
     setAnswered(true);
   }
 
@@ -56,7 +46,7 @@ export default function Question({
       return (
         <div className="field is-grouped-centered">
           <button
-            className="button has-background-light is-large button"
+            className="button has-background-light is-medium"
             name="True"
             id="True"
             value="True"
@@ -66,7 +56,7 @@ export default function Question({
           </button>
           <span className="mx-3 is-align-self-center">OR</span>
           <button
-            className="button has-background-light is-large button"
+            className="button has-background-light is-medium"
             name="False"
             id="False"
             value="False"
@@ -81,7 +71,7 @@ export default function Question({
         <div className="buttons is-centered">
           {multipleAnswers.map((answer, key) => (
             <button
-              className="button has-background-light is-large button"
+              className="button has-background-light is-medium"
               name="answers"
               key={key}
               value={answer}

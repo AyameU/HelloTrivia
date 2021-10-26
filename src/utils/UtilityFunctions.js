@@ -21,3 +21,7 @@ export function AddValueToArrayAtRandomIndex(array, value) {
 export function RenderHTML(text) {
   return <span dangerouslySetInnerHTML={{ __html: text }}></span>;
 }
+
+export function CreateMarkup(text) {
+  return { __html: text };
+}

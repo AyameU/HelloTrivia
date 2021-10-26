@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import {
   AddValueToArrayAtRandomIndex,
-  RenderHTML
+  RenderHTML,
+  CreateMarkup
 } from "../utils/UtilityFunctions";
 
 export default function Question({
@@ -77,9 +78,8 @@ export default function Question({
               value={answer}
               onClick={validateChoice}
               required
-            >
-              {answer}
-            </button>
+              dangerouslySetInnerHTML={CreateMarkup(answer)}
+            ></button>
           ))}
         </div>
       );

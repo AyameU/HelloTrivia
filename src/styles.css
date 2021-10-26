@@ -107,3 +107,8 @@ button {
 ul li {
   padding: initial;
 }
+
+label {
+  font-weight: initial;
+  margin-bottom: initial;
+}

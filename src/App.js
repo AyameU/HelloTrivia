@@ -23,14 +23,26 @@ export default function App() {
     fetch("https://opentdb.com/api_token.php?command=request")
       .then((response) => response.json())
       .then((result) => {
-        if (result.response_code) setSessionToken(result.token);
+        if (result.response_code === 0) {
+          setSessionToken(result.token);
+        }
       });
   }
 
   // Resets the Session Token and wipes all past memory.
   // If a player has answered all questions (overall or in a category),
   // this resets that data.
-  function resetSessionToken() {}
+  function resetSessionToken() {
+    fetch(
+      "https://opentdb.com/api_token.php?command=reset&token=" + sessionToken
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.response_code === 0) {
+          setSessionToken(result.token);
+        }
+      });
+  }
 
   // Gets the error message based on the response code from the API fetch.
   function getErrorMessage(responseCode) {
@@ -77,6 +89,10 @@ export default function App() {
       const URL = url + query + "&" + sessionToken;
       const encodeURL = encodeURI(URL);
 
+      if (sessionToken === "") {
+        getNewSessionToken();
+      }
+
       fetch(encodeURL)
         .then((response) => response.json())
         .then((result) => {
@@ -101,7 +117,7 @@ export default function App() {
 
   return (
     <>
-      <Header getRefreshToken={resetSessionToken} />
+      <Header resetSessionToken={resetSessionToken} />
       <main>
         {!questions && (
           <Search

@@ -3,10 +3,6 @@
   text-align: center;
 }
 
-h1 {
-  font-family: "Bungee Shade", sans-serif;
-}
-
 main {
   margin: 3rem;
 }
@@ -46,4 +42,62 @@ main {
   border-style: initial;
   border-color: initial;
   border-image: initial;
+}
+
+h1 {
+  font-family: "Bungee Shade", sans-serif;
+}
+
+/* Override MVP styling. */
+a {
+  border: initial;
+  border-radius: initial;
+  display: initial;
+  padding: initial;
+  font-size: initial;
+  font-weight: bold;
+  line-height: initial;
+  margin: initial;
+}
+
+form {
+  border: initial;
+  border-radius: initial;
+  box-shadow: initial;
+  max-width: initial;
+  min-width: initial;
+  padding: initial;
+  text-align: inherit;
+  display: initial;
+}
+
+nav {
+  align-items: initial;
+  display: initial;
+  font-weight: initial;
+  justify-content: initial;
+  margin-bottom: initial;
+}
+
+footer,
+header,
+main {
+  max-width: initial;
+  padding: initial;
+}
+
+div header {
+  padding-top: initial;
+}
+
+button {
+  border-radius: initial;
+  display: initial;
+  font-size: initial;
+  font-weight: initial;
+  line-height: initial;
+}
+
+ul li {
+  padding: initial;
 }

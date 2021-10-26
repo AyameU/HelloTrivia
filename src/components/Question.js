@@ -45,7 +45,7 @@ export default function Question({
   function setQuestionControls() {
     if (type === "boolean") {
       return (
-        <div className="field is-grouped-centered">
+        <div className="field is-grouped-centered is-flex is-align-items-center is-justify-content-center">
           <button
             className="button has-background-light is-medium"
             name="True"
@@ -55,7 +55,7 @@ export default function Question({
           >
             True
           </button>
-          <span className="mx-3 is-align-self-center">OR</span>
+          <span className="mx-3">OR</span>
           <button
             className="button has-background-light is-medium"
             name="False"

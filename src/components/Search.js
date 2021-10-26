@@ -187,7 +187,10 @@ export default function Search({
                   name="difficulty"
                   id="anyDifficulty"
                   value=""
-                  onChange={(e) => setDifficulty(e.target.value)}
+                  onChange={(e) => {
+                    setDifficulty(e.target.value);
+                    setErrorMessage("");
+                  }}
                   required
                 ></input>
                 Any Difficulty
@@ -201,7 +204,10 @@ export default function Search({
                   name="difficulty"
                   id="easy"
                   value="easy"
-                  onChange={(e) => setDifficulty(e.target.value)}
+                  onChange={(e) => {
+                    setDifficulty(e.target.value);
+                    setErrorMessage("");
+                  }}
                   required
                 ></input>
                 Easy
@@ -215,7 +221,10 @@ export default function Search({
                   name="difficulty"
                   id="medium"
                   value="medium"
-                  onChange={(e) => setDifficulty(e.target.value)}
+                  onChange={(e) => {
+                    setDifficulty(e.target.value);
+                    setErrorMessage("");
+                  }}
                   required
                 ></input>
                 Medium
@@ -229,7 +238,10 @@ export default function Search({
                   name="difficulty"
                   id="hard"
                   value="hard"
-                  onChange={(e) => setDifficulty(e.target.value)}
+                  onChange={(e) => {
+                    setDifficulty(e.target.value);
+                    setErrorMessage("");
+                  }}
                   required
                 ></input>
                 Hard
@@ -251,7 +263,10 @@ export default function Search({
                   name="format"
                   id="anyType"
                   value={null}
-                  onChange={(e) => setFormat(e.target.value)}
+                  onChange={(e) => {
+                    setFormat(e.target.value);
+                    setErrorMessage("");
+                  }}
                   required
                 ></input>
                 Any Type
@@ -265,7 +280,10 @@ export default function Search({
                   name="format"
                   id="multipleChoice"
                   value="multiple"
-                  onChange={(e) => setFormat(e.target.value)}
+                  onChange={(e) => {
+                    setFormat(e.target.value);
+                    setErrorMessage("");
+                  }}
                   required
                 ></input>
                 Multiple Choice
@@ -279,7 +297,10 @@ export default function Search({
                   name="format"
                   id="trueFalse"
                   value="boolean"
-                  onChange={(e) => setFormat(e.target.value)}
+                  onChange={(e) => {
+                    setFormat(e.target.value);
+                    setErrorMessage("");
+                  }}
                   required
                 ></input>
                 True/False

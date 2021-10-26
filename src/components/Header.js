@@ -40,13 +40,14 @@ export default function Header({ resetSessionToken }) {
           <div className="is-flex is-justify-content-center">
             <button
               className="button has-background-danger has-text-white"
-              onClick={() => {
+              onClick={(e) => {
                 if (
                   window.confirm(
                     "Are you sure you want to reset your session token?"
                   )
                 ) {
                   resetSessionToken();
+                  CloseModal(e, "resetSession");
                 }
               }}
             >

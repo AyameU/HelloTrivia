@@ -7,6 +7,12 @@ main {
   margin: 3rem;
 }
 
+nav {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
 @media screen and (max-width: 1024px) {
   main {
     margin: 2rem;

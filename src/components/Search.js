@@ -134,7 +134,7 @@ export default function Search({
                 id="numOfQuestions"
                 min="1"
                 max="50"
-                placeholder="Number of Questions"
+                placeholder="1-50"
                 required
                 onChange={handleChange}
               ></input>

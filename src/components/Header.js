@@ -6,11 +6,13 @@ export default function Header({ resetSessionToken }) {
   return (
     <>
       <header className="content has-text-centered">
-        <h1 className="title is-1 is-flex is-align-items-center is-justify-content-center">
-          <BsFillPatchQuestionFill />
-          &nbsp; Hello, Trivia
-        </h1>
-        <p className="subtitle">Do You Want to Play a Game?</p>
+        <div>
+          <h1 className="title is-1 is-flex is-align-items-center is-justify-content-center">
+            <BsFillPatchQuestionFill />
+            &nbsp; Hello, Trivia
+          </h1>
+          <p className="subtitle">Do You Want to Play a Game?</p>
+        </div>
         <nav>
           <button
             className="buttonLooksLikeLink"
@@ -35,23 +37,25 @@ export default function Header({ resetSessionToken }) {
             pick another category.
           </p>
           <p>Your token will expire after 6 hours of inactivity.</p>
-          <button
-            className="button has-background-danger has-text-white"
-            onClick={() => {
-              if (
-                window.confirm(
-                  "Are you sure you want to reset your session token?"
-                )
-              ) {
-                resetSessionToken();
-              }
-            }}
-          >
-            Reset Session Token
-          </button>
+          <div className="is-flex is-justify-content-center">
+            <button
+              className="button has-background-danger has-text-white"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "Are you sure you want to reset your session token?"
+                  )
+                ) {
+                  resetSessionToken();
+                }
+              }}
+            >
+              Reset Session Token
+            </button>
+          </div>
         </div>
         <button
-          className="button modal-close is-flex is-justify-content-center"
+          className="button modal-close"
           aria-label="close"
           onClick={(e) => CloseModal(e, "resetSession")}
         ></button>

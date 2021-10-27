@@ -6,20 +6,21 @@ export default function Footer({resetSessionToken}) {
   return (
     <>
     <footer className="footer has-background-black has-text-white has-text-centered pb-6">
-          <button
-            className="buttonLooksLikeLink is-flex is-align-items-center"
-            onClick={(e) => OpenModal(e, "resetSession")}
-          >
-            <AiOutlineInfoCircle size="1rem" color="white"/>
-            &nbsp;
-             Reset Token
-          </button>
       <p>
         Coded by Ayame Ulrich | API{" "}
         <a href="https://opentdb.com" target="_blank" rel="noreferrer">
           Open Trivia Database
         </a>
       </p>
+      <div className="is-flex is-justify-content-center mt-2">
+          <button
+            className="buttonLooksLikeLink is-flex is-align-items-center"
+            onClick={(e) => OpenModal(e, "resetSession")}
+          >
+            <AiOutlineInfoCircle className="mr-1" size="1rem" />
+            <p>Reset Session Token</p>
+          </button>
+        </div>
     </footer>
     <ResetSessionModal resetSessionToken={resetSessionToken} />
     </>

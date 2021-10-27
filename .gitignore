@@ -1,3 +1,9 @@
+### vscode ###
+.vscode/
+
+### production ###
+build/
+
 ### react ###
 .DS_*
 *.log

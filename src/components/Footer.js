@@ -1,5 +1,5 @@
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import { OpenModal } from "./Modal";
+import { OpenModal } from "../utils/ModalFunctions";
 import ResetSessionModal from "./ResetSessionModal";
 
 export default function Footer({resetSessionToken}) {

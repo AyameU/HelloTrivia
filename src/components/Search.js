@@ -263,7 +263,7 @@ export default function Search({
                   type="radio"
                   name="format"
                   id="anyType"
-                  value={null}
+                  value=""
                   onChange={(e) => {
                     setFormat(e.target.value);
                     setErrorMessage("");

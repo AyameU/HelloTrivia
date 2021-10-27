@@ -1,4 +1,4 @@
-import { CloseModal } from "./Modal";
+import { CloseModal } from "../utils/ModalFunctions";
 
 export default function CategoryListModal({categoryNames}) {
     return (

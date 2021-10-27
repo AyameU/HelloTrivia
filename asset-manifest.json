@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/HelloTrivia/static/css/main.cc96c153.chunk.css",
+    "main.js": "/HelloTrivia/static/js/main.5d51b640.chunk.js",
+    "main.js.map": "/HelloTrivia/static/js/main.5d51b640.chunk.js.map",
+    "runtime-main.js": "/HelloTrivia/static/js/runtime-main.2e3315d6.js",
+    "runtime-main.js.map": "/HelloTrivia/static/js/runtime-main.2e3315d6.js.map",
+    "static/css/2.ef4bb070.chunk.css": "/HelloTrivia/static/css/2.ef4bb070.chunk.css",
+    "static/js/2.e719b99e.chunk.js": "/HelloTrivia/static/js/2.e719b99e.chunk.js",
+    "static/js/2.e719b99e.chunk.js.map": "/HelloTrivia/static/js/2.e719b99e.chunk.js.map",
+    "index.html": "/HelloTrivia/index.html",
+    "static/css/2.ef4bb070.chunk.css.map": "/HelloTrivia/static/css/2.ef4bb070.chunk.css.map",
+    "static/css/main.cc96c153.chunk.css.map": "/HelloTrivia/static/css/main.cc96c153.chunk.css.map",
+    "static/js/2.e719b99e.chunk.js.LICENSE.txt": "/HelloTrivia/static/js/2.e719b99e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2e3315d6.js",
+    "static/css/2.ef4bb070.chunk.css",
+    "static/js/2.e719b99e.chunk.js",
+    "static/css/main.cc96c153.chunk.css",
+    "static/js/main.5d51b640.chunk.js"
+  ]
+}

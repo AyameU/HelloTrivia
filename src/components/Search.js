@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import CategoryListModal from "./CategoryListModal";
-import { OpenModal } from "./Modal";
+import { OpenModal } from "../utils/ModalFunctions";
 
 export default function Search({
   player,

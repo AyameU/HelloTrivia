@@ -117,7 +117,7 @@ export default function App() {
 
   return (
     <>
-      <Header resetSessionToken={resetSessionToken} />
+      <Header />
       <main>
         {!questions && (
           <Search
@@ -138,7 +138,7 @@ export default function App() {
         )}
         <p>{errorMessage}</p>
       </main>
-      <Footer />
+      <Footer resetSessionToken={resetSessionToken} />
     </>
   );
 }

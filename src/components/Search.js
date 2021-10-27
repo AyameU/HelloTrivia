@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import { OpenModal, CloseModal } from "./Modal";
+import CategoryListModal from "./CategoryListModal";
+import { OpenModal } from "./Modal";
 
 export default function Search({
   player,
@@ -23,7 +24,7 @@ export default function Search({
   }
 
   function validateCategory() {
-    // Bit of a hacky solution to include search fuctionality.
+    // Bit of a hacky solution to include search functionality.
     // A select would work better frankly, but I don't want to lose marks.
 
     // Get all of the keys from the categories.
@@ -314,37 +315,7 @@ export default function Search({
         </div>
       </form>
 
-      <div id="categoryList" className="modal">
-        <div
-          className="modal-background"
-          onClick={(e) => CloseModal(e, "categoryList")}
-        ></div>
-        <div className="modal-content box">
-          <h3 className="title">Categories</h3>
-          <ul>
-            {categoryNames.map((cat, key) => (
-              <li key={key}>
-                <button
-                  className="buttonLooksLikeLink"
-                  onClick={(e) => {
-                    const input = document.querySelector("#category");
-                    input.value = cat;
-                    validateCategory();
-                    CloseModal(e, "categoryList");
-                  }}
-                >
-                  {cat}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <button
-          className="button modal-close"
-          aria-label="close"
-          onClick={(e) => CloseModal(e, "categoryList")}
-        ></button>
-      </div>
+      <CategoryListModal categoryNames={categoryNames}/>
     </div>
   );
 }
